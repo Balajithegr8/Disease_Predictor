@@ -1,4 +1,4 @@
-import random
+import random                          # Importing all the required libraries
 import json
 import pickle
 
@@ -12,11 +12,11 @@ import pyttsx3
 import time
 
 lemmatizer = WordNetLemmatizer()
-intents = json.loads(open("intents.json").read())
+intents = json.loads(open("intents.json").read())     # loading the required dataset
 
-words = pickle.load(open('words.pkl', 'rb'))
+words = pickle.load(open('words.pkl', 'rb'))          # This is the vocab for the model
 classes = pickle.load(open('classes.pkl', 'rb'))
-model = load_model('chatbot_model.h5')
+model = load_model('chatbot_model.h5')                # loading the pre-trained model
 
 
 def clean_up_sentence(sentence):
@@ -56,7 +56,7 @@ def predict_class(sentence):
 	return return_list
 
 
-def get_response(intents_list, intents_json):
+def get_response(intents_list, intents_json):            # This function gives a random response from the available responses.
 	tag = intents_list[0]['intent']
 	list_of_intents = intents_json['intents']
 
@@ -69,21 +69,28 @@ def get_response(intents_list, intents_json):
 	return result
 
 
-def calling_the_bot(txt):
+def calling_the_bot(txt,press):                           # This function finds the Disease accoring to the symptoms given.
+	
 	global res
 	predict = predict_class(txt)
 	res = get_response(predict, intents)
 
-	engine.say("Found it. From our Database we found that" + res)
+	if(press==1):
+		engine.say(" Found it. From our Database we found that" + res)
+	else:
+		print("Found it. From our Database we found that" + res)
+	
 	# engine.say(res)
+	
 	engine.runAndWait()
 	print("Your Symptom was : ", txt)
 	print("Result found in our Database : ", res)
 
 
 if __name__ == '__main__':
+	
 	print("Bot is Running ...")
-	name=input("Please Enter you First Name and last name: ")
+	name=input("Please Enter you First Name and Last Name : ") 	#name stored in buffer for now
 	
 
 	engine = pyttsx3.init()
@@ -92,67 +99,108 @@ if __name__ == '__main__':
 	# Increase the rate of the bot according to need,
 	# Faster the rate, faster it will speak, vice versa for slower.
 
-	engine.setProperty('rate', 150)
+	engine.setProperty('rate', 125)
 
 	# Increase or decrease the bot's volume
+	
 	volume = engine.getProperty('volume')
 	engine.setProperty('volume', 1.0)
+
 	voices = engine.getProperty('voices')
-	engine.say( "Hello "+name+ " I am sheela, your personal Talking Healthcare Chatbot." )
+	engine.say( " Hello "+name+ " I am sheela, your personal Talking Healthcare Chatbot." )
 	engine.runAndWait()
-	engine.say("If you want to continue via voice chat press 1 or press 2 for chat via texting. ")
+	
+	engine.say(" To continue via voice chat press 1, To continue via texting press 2. ")
 	engine.runAndWait()
-	press=int(input("Please enter here :"))
+	
+	press=int(input("Please Enter Your response here :"))
+	
 	if(press==1):
+
 		while True or final.lower() == 'True':
-			engine.say( "You may tell me your symptoms now." )
-			engine.runAndWait()
-			symptom=input("You may tell me your symptoms now.")
 			
+			engine.say(" You may tell me your symptoms now." )
 			engine.runAndWait()
+			
+			symptom=input("You may tell me your symptoms now.\n")
+			engine.runAndWait()
+			
 			try:
-				engine.say("You said {}".format(symptom))
+				
+				engine.say(" You said {}".format(symptom))
 				engine.runAndWait()
+				
 				print("Scanning our database for your symptom. Please wait.")
 				engine.runAndWait()
+				
+				print("While we search for your disease. would you like to share your mobile number for future references...")
+				mob=int(input("Please enter Mobile number here : ")) 
+				
+				# mobile number stored in buffer for now 
 				# Calling the function by passing the voice inputted
 				# symptoms converted into string
-				calling_the_bot(symptom)
+				
+				calling_the_bot(symptom,press)
+			
 			except sr.UnknownValueError:
-				print("Sorry, Either your symptom is unclear to me or it is not present in our database. Please Try Again.")
+				
+				engine.say("Sorry, Either your symptom is unclear to me or it is not present in our database. Please Try Again.")
 				engine.runAndWait()
 				print("Sorry, Either your symptom is unclear to me or it is not present in our database. Please Try Again.")
+			
 			finally:
+				
 				print("If you want to continue please say True otherwise type False.")
 				engine.runAndWait()
 
 			final=input("Enter Your response here :")
+			
 			if final.lower() == 'no' or final.lower() == 'please exit' or final.lower() == 'false' or final.lower() == 'exit' or final.lower() == 'stop':
-				engine.say("Thank You. Shutting Down now.")
+				
+				engine.say(" Thank You. wish you a speedy recovery, Shutting Down now.")
 				engine.runAndWait()
+				
 				print("Bot has been stopped by the user")
-				exit(0)
+				exit(0) # Program stopped 
+	
+	
 	elif(press==2):
+		
 		while True or final.lower() == 'True':
-			symptom=input("You may tell me your symptoms now.")
+			
+			symptom=input("You may tell me your symptoms now.\n")
 			engine.runAndWait()
+			
 			try:
 				print("Scanning our database for your symptom. Please wait.")
 				engine.runAndWait()
+				
+				print("While we search for your disease. would you like to share your mobile number for future references...")
+				mob=int(input("Please enter Mobile number here : ")) 
+				
+				# Mobile number stored in buffer for now
 				# Calling the function by passing the voice inputted
 				# symptoms converted into string
+				
 				calling_the_bot(symptom)
+			
 			except sr.UnknownValueError:
+				
 				print("Sorry, Either your symptom is unclear to me or it is not present in our database. Please Try Again.")
 				engine.runAndWait()
 				print("Sorry, Either your symptom is unclear to me or it is not present in our database. Please Try Again.")
+			
 			finally:
+				
 				print("If you want to continue please say True otherwise type False.")
 				engine.runAndWait()
 
 			final=input("Enter Your response here :")
+			
 			if final.lower() == 'no' or final.lower() == 'please exit' or final.lower() == 'false' or final.lower() == 'exit' or final.lower() == 'stop':
-				engine.say("Thank You. Shutting Down now.")
+				
+				engine.say(" Thank You. wish you a speedy recovery, Shutting Down now.")
 				engine.runAndWait()
+				
 				print("Bot has been stopped by the user")
-				exit(0)
+				exit(0) # Program stopped
