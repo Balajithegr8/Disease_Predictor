@@ -9,8 +9,8 @@ pyttsx3 is also important to run the talk engine which will help the user who ha
 speech_recognition library is option. Functions using this feature may be added in the future.
 
 ### **Installation**
-Assumuming the dataset is included in the same folder as `main.py` 
-You just need to run the file the required partition and data pre processing will be done by the file itself.
+Assumuming the dataset is included in the same folder as `main.py`.<br>
+You just need to run the file the required partition and data pre processing will be done by the file itself.<br>
 It will install 3 NLTK files 
   1. punkt  
   2. wordnet
