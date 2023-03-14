@@ -11,7 +11,8 @@ speech_recognition library is option. Functions using this feature may be added 
 ### **Installation**
 Assumuming the dataset is included in the same folder as `main.py` 
 You just need to run the file the required partition and data pre processing will be done by the file itself.
-It will install 3 nltk files 
+It will install 
+1. 3 NLTK files 
   -punkt  
   -wordnet
   -omw-1.4
