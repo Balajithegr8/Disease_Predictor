@@ -32,3 +32,4 @@ Now, just run the `chatbot_v_1.1.py` file.
 * This project is maily made to help people who don't have money to visit doctor.
 
 ### License
+* GNU General Public License v3.0
