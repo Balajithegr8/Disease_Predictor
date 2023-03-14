@@ -18,7 +18,7 @@ You just need to run the file the required partition and data pre processing wil
 It will install 3 NLTK files 
   1. punkt  
   2. wordnet
-  3. omw-1.4
+  3. omw-1.4<br>
 All three of these files are neccessary for the working of the program.
 After that a `model.h5` file will eb created which will be used in the chatbot.
 Now, just run the `chatbot_v_1.1.py` file.
