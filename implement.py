@@ -52,4 +52,7 @@ def predictDisease(symptoms):
 # Call the predictDisease function with the symptoms parameter
 symptoms = "Acidity,Indigestion,Stiff Neck"
 predictions = predictDisease(symptoms)
+print("rf prediction is",predictions['rf_model_prediction'])
+print("nb prediction is",predictions['naive_bayes_prediction'])
+print("svm prediction is",predictions['svm_model_prediction'])
 print("final prediction is",predictions['final_prediction'])
