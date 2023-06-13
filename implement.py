@@ -1,3 +1,6 @@
+# This is just the model runner python application to test if the model is working properly 
+# And can be used for futher use in chatbot application
+
 import pickle
 import numpy as np
 import pandas as pd
