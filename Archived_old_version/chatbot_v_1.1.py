@@ -7,7 +7,7 @@ from nltk.stem import WordNetLemmatizer
 from keras.models import load_model
 
 import numpy as np
-import speech_recognition as sr
+import speech_recognition as sr	
 import pyttsx3
 import time
 
